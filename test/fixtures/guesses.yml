@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  information_id: 1
+  answer: 1
+  kind: 1
+  delta: 1
+  score: 1
+  user_id: 1
+
+two:
+  information_id: 1
+  answer: 1
+  kind: 1
+  delta: 1
+  score: 1
+  user_id: 1

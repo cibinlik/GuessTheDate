@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  info: MyText
+  month: 1
+  day: 1
+  year: 1
+  user_id: 1
+
+two:
+  info: MyText
+  month: 1
+  day: 1
+  year: 1
+  user_id: 1
