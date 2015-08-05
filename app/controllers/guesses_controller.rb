@@ -11,6 +11,19 @@ class GuessesController < ApplicationController
   # GET /guesses/1.json
   def show
   end
+  
+  def year
+    #@exclude = Answer.select("question_id").where("user_id = (?)", current_or_guest_user.id)
+    #@question = Question.where("id not in (?)", @exclude).order("RANDOM()").limit(1).first
+    #@information = Information.order("RANDOM()").limit(1).first
+    information = Information.order("RANDOM()").limit(1).first
+    @info = information.info
+    @day = information.day
+    @month = information.month
+    delta = @guess.to_i - information.year.to_i
+    @guess = Guess.new
+    
+  end
 
   # GET /guesses/new
   def new

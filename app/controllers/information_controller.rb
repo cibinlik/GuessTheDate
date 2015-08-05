@@ -7,6 +7,18 @@ class InformationController < ApplicationController
     @information = Information.all
   end
 
+  def month
+    @information = Information.order("RANDOM()").limit(1).first
+  end
+  
+  def day
+    @information = Information.order("RANDOM()").limit(1).first
+  end
+
+  def knowledge
+    @information = Information.order("RANDOM()").limit(1).first
+  end
+
   # GET /information/1
   # GET /information/1.json
   def show
