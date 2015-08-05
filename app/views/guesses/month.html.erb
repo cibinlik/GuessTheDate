@@ -1,4 +1,4 @@
-  <div class="container">
+<div  class = "container">
     <div class="row">
   <%= form_for(@guess) do |f| %>
     <% if @guess.errors.any? %>
@@ -13,21 +13,25 @@
       </div>
     <% end %>
   
-  <%= @information.info %> <%= @information.day %>.<%= @information.month %>.????
+  <%= @information.info %> <%= @information.day %>.??.<%= @information.year %>
     </div>
     <div class="row">
     <div class="input-field col s2">
       
-      <%= f.number_field :answer, :min => "0", :max => "2015", :class => "validate", required: true, length: 4 %>
-      <%= f.label "Year", :'data-error' => "0to2015", :'data-success' => "Valid!" %>
+      <%= f.number_field :answer, :min => "1", :max => "12", :class => "validate", required: true, length: 2 %>
+      <%= f.label "Month", :'data-error' => "1to12", :'data-success' => "Valid!" %>
     </div>
-  </div>
+  
   
     
-    <%= f.hidden_field :kind, :value => 1 %>
+    <%= f.hidden_field :kind, :value => 2 %>
     
-    <div class="actions">
-      <%= f.submit class: 'btn' %>
+
     </div>
+<div class="row">
+    
+      <%= f.submit class: 'btn' %>
+    
+    </div>    
   <% end %>
 </div>

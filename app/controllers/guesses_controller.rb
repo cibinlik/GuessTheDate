@@ -16,13 +16,27 @@ class GuessesController < ApplicationController
     #@exclude = Answer.select("question_id").where("user_id = (?)", current_or_guest_user.id)
     #@question = Question.where("id not in (?)", @exclude).order("RANDOM()").limit(1).first
     #@information = Information.order("RANDOM()").limit(1).first
-    information = Information.order("RANDOM()").limit(1).first
-    @info = information.info
-    @day = information.day
-    @month = information.month
-    delta = @guess.to_i - information.year.to_i
+    @information = Information.order("RANDOM()").limit(1).first
     @guess = Guess.new
-    
+    flash[:information_id] = @information.id
+  end
+  
+  def month
+    @information = Information.order("RANDOM()").limit(1).first
+    @guess = Guess.new
+    flash[:information_id] = @information.id
+  end
+  
+  def day
+    @information = Information.order("RANDOM()").limit(1).first
+    @guess = Guess.new
+    flash[:information_id] = @information.id
+  end
+  
+  def date
+    @information = Information.order("RANDOM()").limit(1).first
+    @guess = Guess.new
+    flash[:information_id] = @information.id
   end
 
   # GET /guesses/new
@@ -38,6 +52,24 @@ class GuessesController < ApplicationController
   # POST /guesses.json
   def create
     @guess = Guess.new(guess_params)
+
+    @information_id = flash[:information_id]
+    @information = Information.find(@information_id)
+
+    case @guess.kind
+    when 1 #year
+      @guess.delta = @information.year - @guess.answer
+    when 2 #month
+      @guess.delta = @information.month - @guess.answer
+    when 3 #day 
+      @guess.delta = @information.day - @guess.answer
+    when 4 #knowledge
+      #USE DATE HERE!
+    
+    
+      
+    else
+    end
 
     respond_to do |format|
       if @guess.save

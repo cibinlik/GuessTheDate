@@ -1,0 +1,41 @@
+<div class="container">
+    <br/>
+    <div class="row">
+        <%= @information.info %> <%= @information.day %>.??.<%= @information.year %>
+    </div>
+    
+    
+    
+    <%= form_for(@guess) do |f| %>
+      <% if @guess.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@guess.errors.count, "error") %> prohibited this guess from being saved:</h2>
+    
+          <ul>
+          <% @guess.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+    
+    
+      
+      <div class="row">
+      <div class="input-field col s2">
+        <%= f.number_field :answer, :min => "1", :max => "12", :class => "validate", length: 2, required: true %>
+        <%= f.label "Month", :'data-error' => "1to12", :'data-success' => "Valid!" %>
+      </div>
+    </div>
+      <%= f.hidden_field :kind, :value => 2 %>
+      
+      
+     <div class="row">
+         <div class="input-field col s2">
+        <button class="btn waves-effect waves-light" type="submit" name="commit" value="Create Guess" />Guess</button>
+        </div>
+        </div>
+    
+    <% end %>
+    
+</div>
