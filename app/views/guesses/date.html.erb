@@ -1,7 +1,7 @@
 <div class="container">
     <br/>
     <div class="row">
-        <%= @information.info %>
+        <%= @information.info %> <%= @information.month %>.??.<%= @information.year %>
     </div>
     
     
@@ -19,30 +19,30 @@
         </div>
       <% end %>
     
-  
-      <div class="row">
+    
+      <%= f.hidden_field :kind, :value => 4 %>
+    <div class="row">
       <div class="input-field col s2">
-        <%= f.number_field :answer, :min => "1", :max => "12", :class => "validate", length: 2, required: true %>
-        <%= f.label "Month", :'data-error' => "1to12", :'data-success' => "Valid!" %>
+         <p class="range-field">
+        <%= f.range_field (:answer, :year, in: 1..31) %>
+        </p>
       </div>
     </div>
-      <%= f.hidden_field :kind, :value => 2 %>
-
-  <script type="javascript">
-        $('.datepicker').pickadate({
-    selectMonths: true, // Creates a dropdown to control month
-    selectYears: 15 // Creates a dropdown of 15 years to control year
-  });
-    </script>
+    <div class="row">
+      <div class="input-field col s2">
+         <p class="range-field">
+        <%= f.range_field :answer, in: 1..31 %>
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s2">
+         <p class="range-field">
+        <%= f.range_field :answer, in: 1..31 %>
+        </p>
+      </div>
+    </div>
       
-<label for="birthdate">Birthdate</label>
-        <input id="birthdate" type="text" class="datepicker">
-          <script type="javascript">
-        $('.datepicker').pickadate({
-    selectMonths: true, // Creates a dropdown to control month
-    selectYears: 15 // Creates a dropdown of 15 years to control year
-  });
-    </script>
       
       
      <div class="row">

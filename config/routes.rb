@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get '/month' => 'guesses#month'
   get '/day' => 'guesses#day'
   get '/date' => 'guesses#date'
+  get '/result' => 'guesses#result'
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 

@@ -1,0 +1,14 @@
+<%= @information.info %>
+<%= @information.day %>
+<%= @information.month %>
+<%= @information.year %>
+<br/>
+Guess:
+<%= @guess.answer %>
+<br/>
+Score:
+<%= @guess.score %>
+<br/>
+<%= link_to "One more!", @path, class: "btn" %>
+<%= session[:totalScore] %>
+

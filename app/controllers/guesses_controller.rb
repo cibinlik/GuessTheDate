@@ -38,6 +38,25 @@ class GuessesController < ApplicationController
     @guess = Guess.new
     flash[:information_id] = @information.id
   end
+  
+  def result
+    information_id = flash[:information_id] #get the id from the create action
+    @information = Information.find(information_id) #find which info is asked by getting from DB
+    guess_id = flash[:guess_id] #get the id from the create action
+    @guess = Guess.find(guess_id) #find that guess from DB
+    
+    case @guess.kind #which path to be used.
+    when 1
+      @path = month_path
+    when 2
+      @path = day_path
+    when 3
+      @path = year_path
+    when 4
+      @path = date_path
+    end
+    
+  end
 
   # GET /guesses/new
   def new
@@ -53,27 +72,31 @@ class GuessesController < ApplicationController
   def create
     @guess = Guess.new(guess_params)
 
-    @information_id = flash[:information_id]
-    @information = Information.find(@information_id)
+    information_id = flash[:information_id] #which information is asked on the guess page.
+    @information = Information.find(information_id) #use the ID to check info from DB
+    flash[:information_id] = information_id #pass the id for the result page
+    flash[:guess_id] = @guess.id #pass the id for the result page
+    
 
     case @guess.kind
-    when 1 #year
-      @guess.delta = @information.year - @guess.answer
-    when 2 #month
+    when 1 #month
       @guess.delta = @information.month - @guess.answer
-    when 3 #day 
+      @guess.score = (1 - (@guess.delta / 12.to_f)) * 10000
+    when 2 #day
       @guess.delta = @information.day - @guess.answer
-    when 4 #knowledge
-      #USE DATE HERE!
-    
-    
-      
+      @guess.score = (1 - (@guess.delta / 31.to_f)) * 10000
+    when 3 #year 
+      @guess.delta = @information.year - @guess.answer
+      @guess.score = (1 - (@guess.delta / 2016.to_f)) * 10000
+    when 4 #date
+      @guess.delta = @information.month - @guess.month
     else
     end
 
     respond_to do |format|
       if @guess.save
-        format.html { redirect_to @guess, notice: 'Guess was successfully created.' }
+        flash[:guess_id] = @guess.id #pass the id for the result page
+        format.html { redirect_to action: "result", notice: 'Good guess!' }
         format.json { render :show, status: :created, location: @guess }
       else
         format.html { render :new }
