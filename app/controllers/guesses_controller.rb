@@ -33,12 +33,7 @@ class GuessesController < ApplicationController
     flash[:information_id] = @information.id
   end
   
-  def date
-    @information = Information.order("RANDOM()").limit(1).first
-    @guess = Guess.new
-    flash[:information_id] = @information.id
-  end
-  
+
   def result
     information_id = flash[:information_id] #get the id from the create action
     @information = Information.find(information_id) #find which info is asked by getting from DB
@@ -67,6 +62,14 @@ class GuessesController < ApplicationController
   def edit
   end
 
+
+  def date
+    @information = Information.order("RANDOM()").limit(1).first
+    @guess = Guess.new
+    flash[:information_id] = @information.id
+  end
+  
+  
   # POST /guesses
   # POST /guesses.json
   def create
@@ -89,7 +92,11 @@ class GuessesController < ApplicationController
       @guess.delta = @information.year - @guess.answer
       @guess.score = (1 - (@guess.delta / 2016.to_f)) * 10000
     when 4 #date
-      @guess.delta = @information.month - @guess.month
+      date = (params[:month] + "." + params[:day] + "." + params[:year]).to_date
+      infodate = (@information.month.to_s + "." + @information.day.to_s + "." + @information.year.to_s).to_date
+      @guess.delta = (date - infodate).abs
+      @guess.score = 10000 - (@guess.delta % 10000)
+      raise @guess.score.inspect
     else
     end
 
@@ -137,6 +144,6 @@ class GuessesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def guess_params
-      params.require(:guess).permit(:information_id, :answer, :kind, :delta, :score, :user_id)
+      params.require(:guess).permit(:information_id, :answer, :kind, :delta, :score, :user_id, :day, :month, :year)
     end
 end

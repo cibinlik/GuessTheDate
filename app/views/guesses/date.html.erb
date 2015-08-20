@@ -18,39 +18,24 @@
           </ul>
         </div>
       <% end %>
-    
-    
       <%= f.hidden_field :kind, :value => 4 %>
-    <div class="row">
-      <div class="input-field col s2">
-         <p class="range-field">
-        <%= f.range_field (:answer, :year, in: 1..31) %>
-        </p>
+      <%= number_field_tag(:month) %>
+      <%= number_field_tag(:day) %>
+      <%= number_field_tag(:year) %>
       </div>
     </div>
-    <div class="row">
-      <div class="input-field col s2">
-         <p class="range-field">
-        <%= f.range_field :answer, in: 1..31 %>
-        </p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s2">
-         <p class="range-field">
-        <%= f.range_field :answer, in: 1..31 %>
-        </p>
-      </div>
-    </div>
+    
       
       
       
-     <div class="row">
-         <div class="input-field col s2">
-        <button class="btn waves-effect waves-light" type="submit" name="commit" value="Create Guess" />Guess</button>
-        </div>
-        </div>
+     <button class="btn waves-effect waves-light" type="submit" name="action">Guess<i class="material-icons right">send</i></i></button>
     
     <% end %>
     
 </div>
+
+<!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/picker.js"></script>
+  <script src="js/init.js"></script>
