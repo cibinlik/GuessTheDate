@@ -33,6 +33,12 @@ class GuessesController < ApplicationController
     flash[:information_id] = @information.id
   end
   
+  def date
+    @information = Information.order("RANDOM()").limit(1).first
+    @guess = Guess.new
+    flash[:information_id] = @information.id
+  end
+  
 
   def result
     information_id = flash[:information_id] #get the id from the create action
@@ -60,13 +66,6 @@ class GuessesController < ApplicationController
 
   # GET /guesses/1/edit
   def edit
-  end
-
-
-  def date
-    @information = Information.order("RANDOM()").limit(1).first
-    @guess = Guess.new
-    flash[:information_id] = @information.id
   end
   
   
@@ -96,7 +95,7 @@ class GuessesController < ApplicationController
       infodate = (@information.month.to_s + "." + @information.day.to_s + "." + @information.year.to_s).to_date
       @guess.delta = (date - infodate).abs
       @guess.score = 10000 - (@guess.delta % 10000)
-      raise @guess.score.inspect
+      @guess.answer = params[:month].rjust(2, '0') + params[:day].rjust(2, '0') + params[:year]
     else
     end
 

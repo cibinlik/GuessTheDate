@@ -1,7 +1,7 @@
 <div class="container">
     <br/>
     <div class="row">
-        <%= @information.info %> <%= @information.month %>.??.<%= @information.year %>
+        <%= @information.info %> on this date:
     </div>
     
     
@@ -19,11 +19,21 @@
         </div>
       <% end %>
       <%= f.hidden_field :kind, :value => 4 %>
-      <%= number_field_tag(:month) %>
-      <%= number_field_tag(:day) %>
-      <%= number_field_tag(:year) %>
+      
+      <div class="row">
+        <div class="input-field col s2">
+        <%= number_field_tag :month, value = nil, placeholder: "MM", min: 1, max: 12, :class => "validate", required: true %>
+        </div>
+      
+        <div class="input-field col s2">
+          <%= number_field_tag :day, value =  nil, placeholder: "DD", min: 1, max: 31, class: "validate", required: true %>
+        </div>
+        
+        <div class="input-field col s2">
+          <%= number_field_tag :year, value = nil, placeholder: "YYYY", min: 1700, max: 2015, class: "validate", required: true %>
+        </div>
       </div>
-    </div>
+    
     
       
       
