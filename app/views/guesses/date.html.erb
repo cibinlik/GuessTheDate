@@ -1,51 +1,61 @@
-<div class="container">
-    <br/>
+<div  class = "container">
     <div class="row">
-        <%= @information.info %> on this date:
+  <%= form_for(@guess) do |f| %>
+    <% if @guess.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@guess.errors.count, "error") %> prohibited this guess from being saved:</h2>
+  
+        <ul>
+        <% @guess.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
     </div>
     
-    
-    
-    <%= form_for(@guess) do |f| %>
-      <% if @guess.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@guess.errors.count, "error") %> prohibited this guess from being saved:</h2>
-    
-          <ul>
-          <% @guess.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-          </ul>
-        </div>
-      <% end %>
-      <%= f.hidden_field :kind, :value => 4 %>
-      
-      <div class="row">
-        <div class="input-field col s2">
-        <%= number_field_tag :month, value = nil, placeholder: "MM", min: 1, max: 12, :class => "validate", required: true %>
-        </div>
-      
-        <div class="input-field col s2">
-          <%= number_field_tag :day, value =  nil, placeholder: "DD", min: 1, max: 31, class: "validate", required: true %>
-        </div>
-        
-        <div class="input-field col s2">
-          <%= number_field_tag :year, value = nil, placeholder: "YYYY", min: 1700, max: 2015, class: "validate", required: true %>
+    <div class="row">
+      <div class="col s7">
+        <div class="card indigo">
+          <div class="card-content white-text">
+            <span class="card-title"><%= @information.info %> on </span>
+            <p class="white-text"></p>
+          </div>
+          <div class="card-action">
+            
+            
+            
+            
+            
+          <div class="row">
+            <div class="input-field col s4">
+            <%= number_field_tag :month, value = nil, min: 1, max: 12, :class => "validate", required: true, :autocomplete => "off" %>
+            <%= f.label :month, "Month (MM)", :class => "active", :'data-error' => "1to12", :'data-success' => "Valid!" %>
+            </div>
+                  <div class="input-field col s4">
+              <%= number_field_tag :day, value =  nil, min: 1, max: 31, class: "validate", required: true, :autocomplete => "off" %>
+              <%= f.label :day, "Day (DD)", :class => "active", :'data-error' => "1to31", :'data-success' => "Valid!" %>
+            </div>
+                    <div class="input-field col s4">
+              <%= number_field_tag :year, value = nil, min: 1700, max: 2015, class: "validate", required: true, :autocomplete => "off" %>
+              <%= f.label :year, "Year (YYYY)", :class => "active", :'data-error' => "1700to2015", :'data-success' => "Valid!" %>
+            </div>
+          </div>
+            
+          <div class="row">
+            <div class="col offset-s4 s4">
+              <button class="btn waves-effect waves-light" type="submit" name="action">Guess<i class="material-icons right">send</i></i></button>
+            </div>
+          </div>
+            
+          </div>
         </div>
       </div>
+    </div>
     
+    <%= f.hidden_field :kind, :value => 1 %>
     
-      
-      
-      
-     <button class="btn waves-effect waves-light" type="submit" name="action">Guess<i class="material-icons right">send</i></i></button>
-    
-    <% end %>
-    
-</div>
 
-<!--  Scripts-->
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="js/materialize.js"></script>
-  <script src="js/picker.js"></script>
-  <script src="js/init.js"></script>
+    </div>
+  <% end %>
+</div>

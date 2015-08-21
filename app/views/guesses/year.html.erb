@@ -1,4 +1,4 @@
-  <div class="container">
+<div  class = "container">
     <div class="row">
   <%= form_for(@guess) do |f| %>
     <% if @guess.errors.any? %>
@@ -12,22 +12,35 @@
         </ul>
       </div>
     <% end %>
-  
-  <%= @information.info %> <%= @information.day %>.<%= @information.month %>.????
     </div>
+    
     <div class="row">
-    <div class="input-field col s2">
-      
-      <%= f.number_field :answer, :min => "0", :max => "2015", :class => "validate", required: true, length: 4 %>
-      <%= f.label "Year", :'data-error' => "0to2015", :'data-success' => "Valid!" %>
+      <div class="col s7">
+        <div class="card indigo accent-1">
+          <div class="card-content white-text">
+            <span class="card-title"><%= @information.info %> on <%= Date::MONTHNAMES[@information.month] %> <%= @information.day.ordinalize %>, YYYY.</span>
+            <p class="white-text"></p>
+          </div>
+          <div class="card-action">
+            <div class="row">
+              <div class="col offset-s4 s4 input-field">
+                <%= f.number_field :answer, :min => "1700", :max => "2015", :class => "validate", required: true, :autocomplete => "off" %>
+                <%= f.label :answer, "Year (YYYY)", :class => "active", :'data-error' => "1700to2015", :'data-success' => "Valid!" %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col offset-s4 s4">
+                <button class="btn waves-effect waves-light" type="submit" name="action">Guess<i class="material-icons right">send</i></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  
     
-    <%= f.hidden_field :kind, :value => 3 %>
+    <%= f.hidden_field :kind, :value => 1 %>
     
-    <div class="actions">
-      <%= f.submit class: 'btn' %>
+
     </div>
   <% end %>
 </div>
