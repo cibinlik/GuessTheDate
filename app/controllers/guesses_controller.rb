@@ -92,7 +92,7 @@ class GuessesController < ApplicationController
       @guess.score = (1 - (@guess.delta / 2016.to_f)) * 10000
     when 4 #date
       date = (params[:month] + "." + params[:day] + "." + params[:year]).to_date
-      infodate = (@information.month.to_s + "." + @information.day.to_s + "." + @information.year.to_s).to_date
+      infodate = (@information.year.to_s + "." + @information.month.to_s + "." + @information.day.to_s).to_date
       @guess.delta = (date - infodate).abs
       @guess.score = 10000 - (@guess.delta % 10000)
       @guess.answer = params[:month].rjust(2, '0') + params[:day].rjust(2, '0') + params[:year]

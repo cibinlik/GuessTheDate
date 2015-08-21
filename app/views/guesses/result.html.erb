@@ -1,14 +1,28 @@
-<%= @information.info %>
-<%= @information.day %>
-<%= @information.month %>
-<%= @information.year %>
-<br/>
-Guess:
-<%= @guess.answer %>
-<br/>
-Score:
-<%= @guess.score %>
-<br/>
-<%= link_to "One more!", @path, class: "btn" %>
-<%= session[:totalScore] %>
-
+<div class="container">
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="col s12 m6">
+        <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+                <span class="card-title"><%= flash[:notice] %></span>
+                <p>
+                    <%= @information.info %> on <%= Date::MONTHNAMES[@information.month] %> <%= @information.day.ordinalize %>, <%= @information.year %>
+                    <br/>
+                Guess:
+                <%= @guess.answer %>
+                <br/>
+                Score:
+                <%= @guess.score %>
+                <br/>
+                <%= session[:totalScore] %>
+                </p>
+              <div class="card-action">
+                  <%= link_to "One more!", @path, class: "btn" %>
+                  
+            </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
