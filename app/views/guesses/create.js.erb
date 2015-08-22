@@ -1,0 +1,8 @@
+var new_guess = $("<%= escape_javascript(render partial: 'resalt') %>").fadeIn('slow');
+$(".guesscard").prepend(new_guess);
+
+$("#card2").remove();
+$("#card1").remove();
+
+var new_info = $("<%= escape_javascript(render partial: 'info') %>").fadeIn('slow');
+$(".newinfo").prepend(new_info);

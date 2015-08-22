@@ -1,8 +1,8 @@
-<div  class = "container">
-  
-<div class ="newinfo"></div>
-
+<% @information = Information.order("RANDOM()").limit(1).first %>
+<% @guess = Guess.new %>
+<% flash[:information_id] = @information.id %>
     
+
   <%= form_for(@guess, remote: true) do |f| %>
     <% if @guess.errors.any? %>
       <div id="error_explanation">
@@ -17,17 +17,17 @@
     <% end %>
     
     
-    <div class="row" id="card1">
+    <div class="row" id="card2">
       <div class="col offset-s2 s8">
         <div class="card teal accent-3">
           <div class="card-content white-text">
-            <span class="card-title" id="newtitle"><%= @information.info %> on <%= @information.day %>.MM.<%= @information.year %></span>
+            <span class="card-title"><%= @information.info %> on <%= @information.day %>.MM.<%= @information.year %></span>
             <p class="white-text"></p>
           </div>
           <div class="card-action">
             <div class="row">
               <div class="col offset-s4 s4 input-field">
-                <%= f.number_field :answer, :id => "numara", :min => "1", :max => "12", :class => "validate", required: true, :autocomplete => "off", :autofocus => true %>
+                <%= f.number_field :answer, :min => "1", :max => "12", :class => "validate", required: true, :autocomplete => "off", :autofocus => true %>
                 <%= f.label :answer, "Month (MM)", :class => "active", :'data-error' => "1to12", :'data-success' => "Valid!" %>
               </div>
             </div>
@@ -46,5 +46,3 @@
 
     </div>
   <% end %>
-  <div class ="guesscard"></div>
-</div>

@@ -56,7 +56,6 @@ class GuessesController < ApplicationController
     when 4
       @path = date_path
     end
-    
   end
 
   # GET /guesses/new
@@ -78,7 +77,7 @@ class GuessesController < ApplicationController
     @information = Information.find(information_id) #use the ID to check info from DB
     flash[:information_id] = information_id #pass the id for the result page
     flash[:guess_id] = @guess.id #pass the id for the result page
-    
+    @guess.information_id = @information.id #to save
 
     case @guess.kind
     when 1 #month
@@ -104,6 +103,7 @@ class GuessesController < ApplicationController
         flash[:guess_id] = @guess.id #pass the id for the result page
         format.html { redirect_to action: "result", notice: 'Good guess!' }
         format.json { render :show, status: :created, location: @guess }
+        format.js {} #create.js.erb
       else
         format.html { render :new }
         format.json { render json: @guess.errors, status: :unprocessable_entity }
